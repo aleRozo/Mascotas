@@ -66,7 +66,7 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         //Construir sin tarea test que se ejecutó previamente
-        sh 'gradle --b ./build.gradle build -x test'
+        sh './gradlew --b ./build.gradle build -x test'
       }
     }
   }
@@ -77,6 +77,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
+      junit 'build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
     }
     failure {
       echo 'This will run only if failed'
